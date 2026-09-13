@@ -283,16 +283,3 @@ item below is a real failure this project hit and how it got fixed.
 | Agentic hop never tried the open web | The original single-hop version could only retry on-site page fetches — if a company (like `linear.app`) genuinely publishes no leadership page anywhere on its own site, there was nothing left to try | Rebuilt as a multi-step ReAct loop (`src/agentic.py`) where the LLM can choose `search_founders` (Tavily) as a distinct tool, not just `fetch_pages` |
 
 ---
-
-## Rubric coverage
-
-| Criterion | Weight | Where it's addressed |
-|---|---|---|
-| Agent & Scraping Architecture | 30% | `crawler.py` (Playwright + concurrent subpage fetch), `agentic.py` (ReAct loop) |
-| LLM & Structured Output Quality | 25% | Instructor + Pydantic (`llm_client.py`), dual-provider fallback |
-| Error Handling & Resilience | 20% | 3-layer try/except (`pipeline.py`), bot-block detection, retry/backoff |
-| Code Quality & Documentation | 15% | Modular `src/` layout, type hints, this README |
-| Loom Walkthrough | 10% | Code structure → live test run → live pipeline run → real bugs found |
-
----
-
