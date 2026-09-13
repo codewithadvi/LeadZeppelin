@@ -35,71 +35,26 @@ Output: output.json, report.html, cost_log.csv
 ## Pipeline overview
 
 ```mermaid
-flowchart LR
-    A(["🌐 Domain list<br/>postman.com, supabase.com, vapi.ai"]) --> B
+flowchart TD
+    A["Domain list"] --> B["Crawl<br/>Playwright"]
+    B --> C["Clean<br/>trafilatura + regex"]
+    C --> D["Extract<br/>Groq + Instructor"]
+    D --> E["Score<br/>confidence 0.0–1.0"]
+    E --> F{"Confidence<br/>≤ 0.6?"}
+    F -->|yes| G["ReAct loop<br/>up to 3 steps"]
+    G --> E
+    F -->|no| H["Enrich<br/>Tavily LinkedIn search"]
+    H --> I["Output<br/>output.json + report.html + cost_log.csv"]
 
-    subgraph S1["1 · Crawl"]
-        B["🎭 Playwright<br/>headless Chromium"] --> B2["Discover subpages<br/>/about /team /pricing /contact"]
-    end
-
-    subgraph S2["2 · Clean"]
-        C["🧹 trafilatura<br/>HTML → markdown"]
-        C2["🔗 regex pass<br/>hrefs + emails"]
-    end
-
-    subgraph S3["3 · Extract"]
-        D["🧠 Groq (Llama/OSS)<br/>+ Instructor"]
-        D2{{"Groq failed?"}}
-        D3["🧠 Gemini 2.0 Flash<br/>fallback"]
-    end
-
-    subgraph S4["4 · Score"]
-        E["📊 Deterministic<br/>confidence 0.0–1.0"]
-    end
-
-    subgraph S5["5 · ReAct loop (≤3 steps)"]
-        F{{"confidence ≤ 0.6?"}}
-        F2["🤖 Thought: LLM picks ONE tool"]
-        F3["Action: fetch_pages<br/>or search_founders"]
-        F4["Observation: re-extract,<br/>recompute confidence"]
-    end
-
-    subgraph S6["6 · Enrich"]
-        G["🔍 Tavily search<br/>missing LinkedIn URLs"]
-    end
-
-    subgraph S7["7 · Output"]
-        H1[["📄 output.json"]]
-        H2[["🖨️ report.html"]]
-        H3[["💰 cost_log.csv"]]
-    end
-
-    B2 --> C --> D
-    B2 --> C2 --> D
-    D --> D2
-    D2 -- yes --> D3
-    D2 -- no --> E
-    D3 --> E
-    E --> F
-    F -- yes --> F2 --> F3 --> F4 --> F
-    F -- no --> G
-    G --> H1 & H2 & H3
-
-    classDef crawl fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
-    classDef clean fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
-    classDef extract fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
-    classDef score fill:#fae8ff,stroke:#a21caf,stroke-width:2px,color:#581c87
-    classDef agentic fill:#ffe4e6,stroke:#e11d48,stroke-width:2px,color:#881337
-    classDef enrich fill:#e0e7ff,stroke:#4f46e5,stroke-width:2px,color:#312e81
-    classDef output fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#7c2d12
-
-    class A,B,B2 crawl
-    class C,C2 clean
-    class D,D2,D3 extract
-    class E score
-    class F,F2,F3,F4 agentic
-    class G enrich
-    class H1,H2,H3 output
+    style A fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
+    style B fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
+    style C fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style D fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    style E fill:#fae8ff,stroke:#a21caf,stroke-width:2px,color:#581c87
+    style F fill:#fae8ff,stroke:#a21caf,stroke-width:2px,color:#581c87
+    style G fill:#ffe4e6,stroke:#e11d48,stroke-width:2px,color:#881337
+    style H fill:#e0e7ff,stroke:#4f46e5,stroke-width:2px,color:#312e81
+    style I fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#7c2d12
 ```
 
 Every stage fails **independently** and is caught at three nested levels —
@@ -128,28 +83,25 @@ else is a straight-through pass; this is the part that loops and makes its
 own decisions, choosing between **two different tools**:
 
 ```mermaid
-sequenceDiagram
-    participant P as Pipeline
-    participant L as LLM (Groq) — Thought
-    participant C as Crawler — Action A
-    participant S as Tavily — Action B
+flowchart TD
+    T["Thought<br/>LLM looks at what's missing"] --> D{"Pick one action"}
+    D -->|fetch_pages| A1["Action: crawl more<br/>on-site pages"]
+    D -->|search_founders| A2["Action: search the<br/>open web via Tavily"]
+    D -->|stop| END["Stop — keep<br/>best result so far"]
 
-    P->>P: compute confidence from first pass
-    loop up to 3 rounds, while confidence ≤ 0.6
-        P->>L: Thought — "here's what's missing, what tool should I use?"
-        alt action = fetch_pages
-            L-->>P: keywords=[leadership, investors, board]
-            P->>C: Action — discover + fetch pages matching those keywords
-            C-->>P: Observation — new page content (or none found)
-        else action = search_founders
-            L-->>P: "the site itself has no leadership page — search the web"
-            P->>S: Action — "{domain} founders CEO co-founder"
-            S-->>P: Observation — leadership names/roles from search snippets
-        else action = stop
-            L-->>P: "nothing more will help" — exit loop
-        end
-        P->>P: re-extract / merge, recompute confidence
-    end
+    A1 --> O["Observation<br/>re-extract, recompute confidence"]
+    A2 --> O
+    O --> C{"Confidence > 0.6<br/>or 3 steps done?"}
+    C -->|no| T
+    C -->|yes| END
+
+    style T fill:#fae8ff,stroke:#a21caf,stroke-width:2px,color:#581c87
+    style D fill:#ffe4e6,stroke:#e11d48,stroke-width:2px,color:#881337
+    style A1 fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
+    style A2 fill:#e0e7ff,stroke:#4f46e5,stroke-width:2px,color:#312e81
+    style O fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style C fill:#fae8ff,stroke:#a21caf,stroke-width:2px,color:#581c87
+    style END fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#7c2d12
 ```
 
 Verified against real sites, not synthetic scenarios:
