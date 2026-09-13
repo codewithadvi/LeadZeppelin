@@ -296,8 +296,3 @@ item below is a real failure this project hit and how it got fixed.
 
 ---
 
-## Operations question
-
-**Yes** — comfortable spending roughly 40% of working hours on manual lead
-prospecting, email discovery, and account handling alongside the AI
-engineering work.
