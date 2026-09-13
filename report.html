@@ -1,0 +1,94 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Lead Enrichment Report</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Arial, sans-serif; max-width: 900px;
+         margin: 40px auto; padding: 0 20px; color: #1a1a1a; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  .subtitle { color: #666; margin-bottom: 32px; }
+  .card { border: 1px solid #e0e0e0; border-radius: 10px; padding: 24px; margin-bottom: 20px; }
+  .card.failed { border-color: #f3c1c1; background: #fff8f8; }
+  .domain-row { display: flex; justify-content: space-between; align-items: baseline; }
+  .domain { font-size: 1.25rem; font-weight: 600; }
+  .confidence { font-size: 0.9rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
+  .conf-high { background: #dcfce7; color: #166534; }
+  .conf-mid { background: #fef9c3; color: #854d0e; }
+  .conf-low { background: #fee2e2; color: #991b1b; }
+  .overview { margin: 14px 0; line-height: 1.5; }
+  .section-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;
+                    color: #888; margin-top: 16px; margin-bottom: 6px; }
+  .team-member { padding: 6px 0; }
+  .team-member a { color: #2563eb; text-decoration: none; }
+  .emails span { background: #f1f5f9; padding: 2px 8px; border-radius: 6px; margin-right: 6px;
+                 font-family: monospace; font-size: 0.9rem; }
+  .error-text { color: #991b1b; font-family: monospace; font-size: 0.9rem; }
+  .pages-scraped { font-size: 0.8rem; color: #999; margin-top: 16px; }
+</style>
+</head>
+<body>
+  <h1>Lead Enrichment Report</h1>
+  <p class="subtitle">3/3 domains enriched successfully</p>
+  
+    <div class="card">
+      <div class="domain-row">
+        <span class="domain">postman.com</span>
+        <span class="confidence conf-high">
+          100% confidence &middot; groq
+        </span>
+      </div>
+      <p class="overview">Postman is an API platform for building and using APIs. Postman simplifies each step of the API lifecycle and streams collaboration so you can create better APIs—faster.</p>
+
+      <div class="section-label">Target Audience</div>
+      <div>Engineers and development teams building, testing, managing, and distributing APIs, from individual developers to enterprise organizations.</div>
+
+      <div class="section-label">Contact Emails</div>
+      <div class="emails"><span>info@postman.com</span><span>info-jp@postman.com</span><span>accommodations@postman.com</span></div>
+
+      <div class="section-label">Team</div>
+      <div class="team-member">Abhinav Asthana &mdash; CEO and Co-founder &middot; <a href="https://www.linkedin.com/in/abhinavasthana">LinkedIn</a></div><div class="team-member">Ankit Sobti &mdash; Co-founder &middot; <a href="https://www.linkedin.com/in/ankit-sobti">LinkedIn</a></div><div class="team-member">Abhijit Kane &mdash; Co-founder &middot; <a href="https://in.linkedin.com/in/abhijitkane">LinkedIn</a></div>
+
+      <div class="pages-scraped">Scraped 6 pages: https://postman.com, https://postman.com/pricing/, https://postman.com/company/press-media/, https://postman.com/company/about-postman/, https://postman.com/company/careers/, https://postman.com/company/contact-us/</div>
+    </div>
+    
+    <div class="card">
+      <div class="domain-row">
+        <span class="domain">supabase.com</span>
+        <span class="confidence conf-mid">
+          65% confidence &middot; groq
+        </span>
+      </div>
+      <p class="overview">Supabase is an open-source Postgres development platform that provides database, authentication, realtime, storage, edge functions and vector embeddings, enabling developers to build full-stack applications quickly. It offers scalable, production-ready infrastructure with enterprise security features such as SOC 2, ISO 27001, and HIPAA compliance.</p>
+
+      <div class="section-label">Target Audience</div>
+      <div>Developers building full‑stack applications, including AI‑powered apps, who need a managed Postgres backend with built‑in auth, realtime, storage, and edge functions.</div>
+
+      <div class="section-label">Contact Emails</div>
+      <div class="emails"><span style="color:#999">None found</span></div>
+
+      <div class="section-label">Team</div>
+      <div class="team-member">Jakob Steinn &mdash; Co-founder & Tech Lead</div>
+
+      <div class="pages-scraped">Scraped 6 pages: https://supabase.com, https://supabase.com/pricing, https://supabase.com/contact/sales, https://supabase.com/solutions/innovation-teams, https://supabase.com/company, https://supabase.com/careers</div>
+    </div>
+    
+    <div class="card">
+      <div class="domain-row">
+        <span class="domain">vapi.ai</span>
+        <span class="confidence conf-high">
+          100% confidence &middot; groq
+        </span>
+      </div>
+      <p class="overview">Vapi provides a unified platform for building, testing, deploying, and managing voice AI agents, offering orchestration, real-time monitoring, and enterprise‑grade configurability. It enables enterprises to launch voice‑driven conversational experiences quickly with scalable infrastructure, compliance, and AI guardrails.</p>
+
+      <div class="section-label">Target Audience</div>
+      <div>Enterprises and developer teams building voice AI agents and conversational call center solutions.</div>
+
+      <div class="section-label">Contact Emails</div>
+      <div class="emails"><span>Talent@vapi.ai</span></div>
+
+      <div class="section-label">Team</div>
+      <div class="team-member">Jason Mitura &mdash; VP of Software Development &middot; <a href="https://www.linkedin.com/in/jasonmitura">LinkedIn</a></div>
+
+      <div class="pages-scraped">Scraped 3 pages: https://vapi.ai, https://vapi.ai/pricing, https://vapi.ai/careers</div>
+    </div>
+    
+</body></html>

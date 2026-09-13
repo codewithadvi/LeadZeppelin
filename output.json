@@ -1,0 +1,87 @@
+[
+  {
+    "domain": "postman.com",
+    "company_overview": "Postman is an API platform for building and using APIs. Postman simplifies each step of the API lifecycle and streamlines collaboration so you can create better APIs\u2014faster.",
+    "target_audience": "Engineers and development teams who build, test, manage, and distribute APIs and services.",
+    "contact_emails": [
+      "info@postman.com",
+      "info-jp@postman.com",
+      "accommodations@postman.com"
+    ],
+    "team_members": [
+      {
+        "name": "Abhinav Asthana",
+        "role": "CEO and Co-founder",
+        "linkedin_url": "https://www.linkedin.com/in/abhinavasthana"
+      },
+      {
+        "name": "Ankit Sobti",
+        "role": "Co-founder",
+        "linkedin_url": "https://www.linkedin.com/in/ankit-sobti"
+      },
+      {
+        "name": "Abhijit Kane",
+        "role": "Co-founder",
+        "linkedin_url": "https://www.linkedin.com/in/abhijitkane"
+      }
+    ],
+    "confidence_score": 1.0,
+    "llm_source": "groq",
+    "pages_scraped": [
+      "https://postman.com",
+      "https://postman.com/pricing/",
+      "https://postman.com/company/press-media/",
+      "https://postman.com/company/about-postman/",
+      "https://postman.com/company/careers/",
+      "https://postman.com/company/contact-us/"
+    ],
+    "error": null
+  },
+  {
+    "domain": "supabase.com",
+    "company_overview": "Supabase provides an open\u2011source Postgres\u2011based developer platform that adds authentication, realtime, storage, edge functions, and vector search to simplify building full\u2011stack applications. It delivers instant REST and GraphQL APIs, scalable infrastructure, and enterprise\u2011grade security features for developers and innovation teams.",
+    "target_audience": "Developers building full\u2011stack web or mobile applications who need a managed Postgres backend with built\u2011in auth, realtime, storage, and API generation.",
+    "contact_emails": [],
+    "team_members": [
+      {
+        "name": "Jakob Steinn",
+        "role": "Co\u2011founder & Tech Lead",
+        "linkedin_url": null
+      }
+    ],
+    "confidence_score": 0.65,
+    "llm_source": "groq",
+    "pages_scraped": [
+      "https://supabase.com",
+      "https://supabase.com/pricing",
+      "https://supabase.com/contact/sales",
+      "https://supabase.com/solutions/innovation-teams",
+      "https://supabase.com/company",
+      "https://supabase.com/careers"
+    ],
+    "error": null
+  },
+  {
+    "domain": "vapi.ai",
+    "company_overview": "Vapi provides a unified platform for building, testing, deploying, and monitoring voice agents with enterprise\u2011grade infrastructure, AI guardrails and compliance. It enables enterprises to launch scalable voice conversational experiences quickly, with real\u2011time analytics, SSO, and dedicated support.",
+    "target_audience": "Enterprises and developers building voice agents and conversational AI solutions at scale",
+    "contact_emails": [
+      "Talent@vapi.ai"
+    ],
+    "team_members": [
+      {
+        "name": "Jason Mitura",
+        "role": "VP of Software Development",
+        "linkedin_url": "https://www.linkedin.com/in/jasonmitura"
+      }
+    ],
+    "confidence_score": 1.0,
+    "llm_source": "groq",
+    "pages_scraped": [
+      "https://vapi.ai",
+      "https://vapi.ai/pricing",
+      "https://vapi.ai/careers"
+    ],
+    "error": null
+  }
+]
